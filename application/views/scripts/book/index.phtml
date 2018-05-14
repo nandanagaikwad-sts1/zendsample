@@ -1,0 +1,34 @@
+<?php
+$this->title ="My Books";
+$this->headTitle($this->title);
+?>
+<?php if(!empty($this->message)): ?>
+    <p>
+        <div class="alert alert-success">
+            <?php echo $this->message; ?>
+        </div>
+    </p>
+<?php endif;   ?>
+<p><a href="<?php echo $this->url(array('controller'=>'book','action'=>'add')); ?>">Add new book</a></p>
+<table border="1" cellpadding="1" cellspacing="1">
+	<tr>
+		<th>Sr. No</th>
+		<th>Title</th>
+		<th>Author</th>
+		<th>Actions</th>
+	</tr>
+	<?php $i=1; ?>
+	<?php  foreach($this->books as $book) : ?>
+		<tr>
+			<td><?php echo $i; ?></td>
+			<td><?php echo $this->escape($book['name']); ?></td>
+			<td><?php echo $this->escape($book['author']); ?></td>
+			<td>
+				<a href="<?php echo $this->url(array('controller' =>'book', 'action' =>'edit', 'id' =>$book['id'])); ?>">Edit</a>
+				<a href="<?php echo $this->url(array('controller' =>'book', 'action' =>'delete', 'id' =>$book['id'])); ?>">Delete</a>
+
+			</td>
+		</tr>
+		<?php $i++; ?>
+	<?php endforeach; ?>
+</table>

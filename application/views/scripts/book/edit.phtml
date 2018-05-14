@@ -1,0 +1,14 @@
+<?php
+$this->title = 'Edit Book';
+$this->headTitle($this->title); ?>
+<?php if(!empty($this->message)): ?>
+    <p>
+        <div class="alert alert-success">
+            <?php echo $this->message; ?>
+        </div>
+    </p>
+<?php endif;   ?>
+<?php
+echo $this->form;
+
+?>

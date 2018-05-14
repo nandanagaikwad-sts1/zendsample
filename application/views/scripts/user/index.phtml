@@ -1,0 +1,46 @@
+<?php
+$this->title ="User Listing";
+$this->headTitle($this->title);
+?>
+<?php if(!empty($this->message)): ?>
+    <p>
+        <div class="alert alert-success">
+            <?php echo $this->message; ?>
+        </div>
+    </p>
+<?php endif;   ?>
+
+<p><a href="<?php echo $this->url(array('controller'=>'user','action'=>'add')); ?>">Add new User</a></p>
+<table border="1" cellpadding="1" cellspacing="1">
+	<tr>
+		<th>Sr. No</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+		<th>value</th>
+		<th>Created Date</th>
+		<th>Actions</th>
+	</tr>
+	<?php $i=1; $val =''; ?>
+	<?php  foreach($this->users as $user) : ?>
+
+		<?php if(!empty($user->UserSettings->toArray())){
+			$usersettings = $user->UserSettings->toArray();
+			$val = $usersettings[0]['value'];
+		} ?>
+		<tr>
+			<td><?php echo $i; ?></td>
+			<td><?php echo $this->escape($user['fname']); ?></td>
+			<td><?php echo $this->escape($user['lname']); ?></td>
+			<td><?php echo $this->escape($user['email']); ?></td>
+			<td><?php echo !empty($val)?$val:""; ?></td>
+			<td><?php echo $this->escape($user->date_created); ?></td>
+			<td>
+				<a href="<?php echo $this->url(array('controller' =>'user', 'action' =>'edit', 'id' =>$user['id'])); ?>">Edit</a>
+				<a href="<?php echo $this->url(array('controller' =>'user', 'action' =>'delete', 'id' =>$user['id'])); ?>">Delete</a>
+
+			</td>
+		</tr>
+		<?php $i++; unset($val);?>
+	<?php endforeach; ?>
+</table>
